@@ -1,0 +1,57 @@
+{
+  "seed": 42,
+  "paths": {
+    "cache": "cache",
+    "results": "results"
+  },
+  "datasets": {
+    "toolbench": {
+      "path": "data/toolbench",
+      "scene_resolution": 200.0,
+      "scene_coactivation_min": 3,
+      "scene_npmi_min": 0.0,
+      "expansion_coactivation_min": 3,
+      "pool_cap": null
+    },
+    "api_bank": {
+      "path": "data/api_bank",
+      "scene_resolution": 1.0,
+      "scene_coactivation_min": 1,
+      "scene_npmi_min": 0.0,
+      "expansion_coactivation_min": 3,
+      "pool_cap": 157
+    }
+  },
+  "models": {
+    "bge-m3": {
+      "model_id": "BAAI/bge-m3",
+      "query_prefix": "为这个句子生成表示以用于检索相关文章："
+    },
+    "Qwen3-Embedding-0.6B": {
+      "model_id": "Qwen/Qwen3-Embedding-0.6B",
+      "query_prefix": "为这个句子生成表示以用于检索相关文章："
+    }
+  },
+  "encoding": {
+    "max_sequence_length": 256,
+    "batch_size": 64
+  },
+  "ranking": {
+    "dense_seed_count": 3,
+    "ranker_weight": 0.22,
+    "pool_bonus": 10.0,
+    "train_sample": 10000,
+    "lightgbm": {
+      "n_estimators": 800,
+      "learning_rate": 0.05,
+      "num_leaves": 31,
+      "min_child_samples": 50,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "n_jobs": -1
+    }
+  },
+  "evaluation": {
+    "top_k": [1, 3, 5, 10]
+  }
+}
